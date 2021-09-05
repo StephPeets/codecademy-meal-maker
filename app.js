@@ -40,19 +40,27 @@ let menu = {
     let dishes = menu._courses[courseName];
     let dishNum = (Math.random()*dishes.length);
     let dish = Math.floor(dishNum);
-    return console.log(dishes[dish]);
+    return dishes[dish];
   },
   generateRandomMeal() {
-    
-
+    let meal= [];
+    let bill = 0;
+    for (let course in this._courses) {
+      bill += course.price;
+      meal.push(menu.getRandomDishFromCourse(course));
+    }
+      return console.log(meal);
   }
 }
-menu.appetizers = ["a", "b"];
-menu.appetizers = ["food", "2"];
-menu.appetizers = ["lard", 12];
-// menu.appetizers = "13 slimjim"
-menu.mains = ["fish", "$1_000"];
-menu.mains = ["fishy chicken", "$10"];
-menu.addDishToCourse("desserts", "sweet butts", "if you have to ask...");
-menu.addDishToCourse("desserts", "swxgdxgs", "i575452.");
-menu.getRandomDishFromCourse("appetizers")
+menu.appetizers = ["salad", 10];
+menu.appetizers = ["franks in a blanket", 8];
+menu.appetizers = ["bruschetta", 12];
+menu.addDishToCourse("appetizers", "cheese platter", 15);
+menu.mains = ["filet mignon", 30]
+menu.mains = ["tofurkey", 15];
+menu.mains = ["chicken", 20];
+menu.addDishToCourse("mains", "tuna steak", 25);
+menu.desserts = ["mango sorbet", 8];
+menu.addDishToCourse("desserts", "assorted macaroons", 10);
+menu.addDishToCourse("desserts", "tiramisu", 10);
+menu.generateRandomMeal();
