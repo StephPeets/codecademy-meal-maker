@@ -21,13 +21,22 @@ let menu = {
     return this.courses.desserts;
   },
   set appetizers(appIn) {
-    return appetizers = this.appetizers.push({name: appIn[0], price: appIn[1]});
+    return appetizers = this.appetizers.push({
+      name: appIn[0],
+      price: appIn[1]
+    });
   },
   set mains(mainIn) {
-    return mains = this.mains.push({name: mainIn[0], price: mainIn[1]});
+    return mains = this.mains.push({
+      name: mainIn[0],
+      price: mainIn[1]
+    });
   },
   set desserts(dessertIn) {
-    return desserts = this.desserts.push({name: dessertIn[0], price: dessertIn[1]});
+    return desserts = this.desserts.push({
+      name: dessertIn[0],
+      price: dessertIn[1]
+    });
   },
   addDishToCourse(courseName, dishName, dishPrice) {
     const dish = {
@@ -36,22 +45,32 @@ let menu = {
     };
     return menu._courses[courseName].push(dish);
   },
-  getRandomDishFromCourse(courseName){
+  getRandomDishFromCourse(courseName) {
     let dishes = menu._courses[courseName];
-    let dishNum = (Math.random()*dishes.length);
+    let dishNum = (Math.random() * dishes.length);
     let dish = Math.floor(dishNum);
     return dishes[dish];
   },
   generateRandomMeal() {
-    let meal= [];
+    let meal = [];
     let bill = 0;
     for (let course in this._courses) {
-      bill += course.price;
       meal.push(menu.getRandomDishFromCourse(course));
     }
-      return console.log(meal);
+    for (let i = 0; i < meal.length; i++) {
+      bill += meal[i].price;
+    }
+    let tonightsMenu = `Menu:
+    ${meal[0].name}, ${meal[0].price}
+    ${meal[1].name}, ${meal[1].price}
+    ${meal[2].name}, ${meal[2].price}
+    
+    Total: $${bill}`;
+
+    return console.log(tonightsMenu)
   }
 }
+
 menu.appetizers = ["salad", 10];
 menu.appetizers = ["franks in a blanket", 8];
 menu.appetizers = ["bruschetta", 12];
@@ -63,4 +82,5 @@ menu.addDishToCourse("mains", "tuna steak", 25);
 menu.desserts = ["mango sorbet", 8];
 menu.addDishToCourse("desserts", "assorted macaroons", 10);
 menu.addDishToCourse("desserts", "tiramisu", 10);
+
 menu.generateRandomMeal();
